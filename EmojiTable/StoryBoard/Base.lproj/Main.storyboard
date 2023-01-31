@@ -111,6 +111,9 @@
                                                     <rect key="frame" x="16" y="0.0" width="343" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="editingChangedTF:" destination="Ntv-Fq-CoK" eventType="editingChanged" id="bce-My-D1O"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -136,6 +139,9 @@
                                                     <rect key="frame" x="16" y="0.0" width="343" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="editingChangedTF:" destination="Ntv-Fq-CoK" eventType="editingChanged" id="p4V-LB-71J"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -161,6 +167,9 @@
                                                     <rect key="frame" x="16" y="0.0" width="343" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="editingChangedTF:" destination="Ntv-Fq-CoK" eventType="editingChanged" id="UhA-XT-hcm"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
