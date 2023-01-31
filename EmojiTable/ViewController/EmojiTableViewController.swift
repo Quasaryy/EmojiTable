@@ -11,19 +11,26 @@ class EmojiTableViewController: UITableViewController {
     
     // MARK: - Properties
     var emojis = Emoji.getEmojis()
-
+    
+    // MARK: Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
+    // MARK: IB Actions
     @IBAction func unwindSegue(for unwindSegue: UIStoryboardSegue) {
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let navigationVC = segue.destination as! UINavigationController
+        let AddTVC = navigationVC.topViewController as! AddTableViewController
+        AddTVC.delegate = self
+    }
 
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return emojis.count
     }
@@ -85,5 +92,14 @@ class EmojiTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+
+extension EmojiTableViewController: AddTableViewControllerDelegate {
+    func addNewEmoji(emoji: String, name: String, description: String) {
+        emojis.append(Emoji(emoji: emoji, name: name, description: description))
+        tableView.reloadData()
+    }
+    
 
 }

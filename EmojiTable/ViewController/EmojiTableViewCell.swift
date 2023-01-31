@@ -14,6 +14,7 @@ class EmojiTableViewCell: UITableViewCell {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var emojiLabel: UILabel!
     
+    // MARK: Override Methods
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

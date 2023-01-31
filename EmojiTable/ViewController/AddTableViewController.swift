@@ -7,10 +7,24 @@
 
 import UIKit
 
-class AddTableViewController: UITableViewController {
+protocol AddTableViewControllerDelegate: AnyObject {
+    func addNewEmoji(emoji: String, name: String, description: String) -> Void
+}
 
+class AddTableViewController: UITableViewController {
+    
+    // MARK: Properties
+    weak var delegate: AddTableViewControllerDelegate?
+    
+    @IBOutlet var emojiTF: UITextField!
+    @IBOutlet var nameTF: UITextField!
+    @IBOutlet var descriptionTF: UITextField!
+    
+    // MARK: Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem?.isEnabled = true
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -21,15 +35,15 @@ class AddTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 0
+//    }
+//
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return 0
+//    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,5 +99,11 @@ class AddTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    // MARK: IB Actions
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        delegate?.addNewEmoji(emoji: emojiTF.text!, name: nameTF.text!, description: descriptionTF.text!)
+        dismiss(animated: true)
+    }
+    
 }

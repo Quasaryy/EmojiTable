@@ -185,8 +185,17 @@
                                 <segue destination="YTj-gh-QmB" kind="unwind" unwindAction="unwindSegueFor:" id="see-62-voB"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="p9v-sh-Fe9"/>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="p9v-sh-Fe9">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="Ntv-Fq-CoK" id="58I-hd-UcG"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="descriptionTF" destination="9KI-kG-5Vb" id="DpW-W3-Xl8"/>
+                        <outlet property="emojiTF" destination="7id-LY-fAp" id="70a-tR-fOj"/>
+                        <outlet property="nameTF" destination="gSJ-CY-x8N" id="lbs-kq-Zbj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dvF-Dk-XzD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="YTj-gh-QmB" userLabel="Exit" sceneMemberID="exit"/>
