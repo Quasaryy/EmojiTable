@@ -7,15 +7,9 @@
 
 import UIKit
 
-protocol AddTableViewControllerDelegate: AnyObject {
-    func addNewEmoji(emoji: String, name: String, description: String) -> Void
-}
-
 class AddTableViewController: UITableViewController {
     
-    // MARK: Properties
-    weak var delegate: AddTableViewControllerDelegate?
-    
+    // MARK: IB Outlets
     @IBOutlet var emojiTF: UITextField!
     @IBOutlet var nameTF: UITextField!
     @IBOutlet var descriptionTF: UITextField!
@@ -25,12 +19,6 @@ class AddTableViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem?.isEnabled = true
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -99,11 +87,5 @@ class AddTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
-    // MARK: IB Actions
-    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        delegate?.addNewEmoji(emoji: emojiTF.text!, name: nameTF.text!, description: descriptionTF.text!)
-        dismiss(animated: true)
-    }
     
 }

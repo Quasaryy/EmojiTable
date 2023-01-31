@@ -80,7 +80,7 @@
                     <navigationItem key="navigationItem" title="Emoji Table" id="XNq-dG-Cha">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="EI8-D4-lXN">
                             <connections>
-                                <segue destination="yjq-qt-JxP" kind="show" identifier="" id="QvN-Ld-XIY"/>
+                                <segue destination="yjq-qt-JxP" kind="show" identifier="fromEmojiToAdd" id="QvN-Ld-XIY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -182,12 +182,12 @@
                     <navigationItem key="navigationItem" id="Ic1-jV-9fS">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="3Fp-41-Avf">
                             <connections>
-                                <segue destination="YTj-gh-QmB" kind="unwind" unwindAction="unwindSegueFor:" id="see-62-voB"/>
+                                <segue destination="YTj-gh-QmB" kind="unwind" identifier="" unwindAction="unwindSegueWithSegue:" id="9Jc-sD-yPe"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="p9v-sh-Fe9">
                             <connections>
-                                <action selector="saveButtonTapped:" destination="Ntv-Fq-CoK" id="58I-hd-UcG"/>
+                                <segue destination="YTj-gh-QmB" kind="unwind" identifier="saveSegue" unwindAction="unwindSegueWithSegue:" id="TxX-nb-VXT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
