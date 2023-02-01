@@ -192,7 +192,7 @@
                     <navigationItem key="navigationItem" id="Ic1-jV-9fS">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="3Fp-41-Avf">
                             <connections>
-                                <segue destination="YTj-gh-QmB" kind="unwind" identifier="" unwindAction="unwindSegueWithSegue:" id="9Jc-sD-yPe"/>
+                                <segue destination="YTj-gh-QmB" kind="unwind" identifier="cancelSegue" unwindAction="unwindSegueWithSegue:" id="9Jc-sD-yPe"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="p9v-sh-Fe9">

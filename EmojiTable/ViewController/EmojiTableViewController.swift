@@ -23,6 +23,7 @@ class EmojiTableViewController: UITableViewController {
         guard segue.identifier == "fromCellToAdd" else { return }
         let navigationController = segue.destination as! UINavigationController
         let addTableVC = navigationController.topViewController as! AddTableViewController
+        addTableVC.title = "Edit"
         let index = tableView.indexPathForSelectedRow!.row
         addTableVC.emoji = emojis[index]
     }
@@ -68,16 +69,27 @@ class EmojiTableViewController: UITableViewController {
     
     // MARK: IB Actions
     @IBAction func unwindSegue(segue: UIStoryboardSegue) {
-        guard segue.identifier == "saveSegue" else { return }
-        let sourceVC = segue.source as! AddTableViewController
+        guard let sourceVC = segue.source as? AddTableViewController else { return }
         
-        if let indexPath = tableView.indexPathForSelectedRow  {
-            emojis[indexPath.row] = Emoji(emoji: sourceVC.emojiTF.text!, name: sourceVC.nameTF.text!, description: sourceVC.descriptionTF.text!, favorite: emojis[indexPath.row].favorite)
-            tableView.reloadRows(at: [indexPath], with: .none)
-        } else {
-            let indexPath = IndexPath(row: emojis.count, section: 0)
-            emojis.append(Emoji(emoji: sourceVC.emojiTF.text!, name: sourceVC.nameTF.text!, description: sourceVC.descriptionTF.text!, favorite: false))
-            tableView.insertRows(at: [indexPath], with: .top)
+        // Adding or editing emoji if tapped Save button
+        if segue.identifier == "saveSegue" {
+            
+            // Editing emoji if segue was performed from any selected row
+            if let indexPath = tableView.indexPathForSelectedRow  {
+                emojis[indexPath.row] = Emoji(emoji: sourceVC.emojiTF.text!, name: sourceVC.nameTF.text!, description: sourceVC.descriptionTF.text!, favorite: emojis[indexPath.row].favorite)
+                tableView.reloadRows(at: [indexPath], with: .none)
+                
+                // Adding a new emoji if segue was performed not from row
+            } else {
+                let indexPath = IndexPath(row: emojis.count, section: 0)
+                emojis.append(Emoji(emoji: sourceVC.emojiTF.text!, name: sourceVC.nameTF.text!, description: sourceVC.descriptionTF.text!, favorite: false))
+                tableView.insertRows(at: [indexPath], with: .top)
+            }
+            
+            // Clearing selected row if tapped Cancel button
+        } else if segue.identifier == "cancelSegue" {
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
