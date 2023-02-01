@@ -14,84 +14,37 @@ class AddTableViewController: UITableViewController {
     @IBOutlet var nameTF: UITextField!
     @IBOutlet var descriptionTF: UITextField!
     
+    // MARK: - Properties
+    // Getting emoji from source table view controller if segue performed from the cell
+    var emoji: Emoji?
+    
     // MARK: Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem?.isEnabled = false
+        // Getting data for text fields if segue performed from the cell
+        emojiTF.text = emoji?.emoji ?? ""
+        nameTF.text = emoji?.name ?? ""
+        descriptionTF.text = emoji?.description ?? ""
+        
+        // Updating save button state
+        updateSaveButton()
     }
-    
-    // MARK: - Table view data source
-    
-    //    override func numberOfSections(in tableView: UITableView) -> Int {
-    //        // #warning Incomplete implementation, return the number of sections
-    //        return 0
-    //    }
-    //
-    //    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    //        // #warning Incomplete implementation, return the number of rows
-    //        return 0
-    //    }
-    
-    /*
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     
     // MARK: IB Actions
-    // Enabeling save button if all text fields is not empty
+    // Enable save button if all text fields are not empty and have been edited
     @IBAction func editingChangedTF(_ sender: UITextField) {
+        updateSaveButton()
+    }
+    
+}
+
+// MARK: Private Methods
+extension AddTableViewController {
+    
+    // Enable save button if all text fields are not empty
+    private func updateSaveButton() {
         let emoji = emojiTF.text ?? ""
         let name = nameTF.text ?? ""
         let description = descriptionTF.text ?? ""

@@ -16,7 +16,15 @@ class EmojiTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
+        navigationItem.leftBarButtonItem = editButtonItem
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "fromCellToAdd" else { return }
+        let navigationController = segue.destination as! UINavigationController
+        let addTableVC = navigationController.topViewController as! AddTableViewController
+        let index = tableView.indexPathForSelectedRow!.row
+        addTableVC.emoji = emojis[index]
     }
     
     // MARK: - Table view data source
@@ -26,7 +34,7 @@ class EmojiTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // Casting cell as custom cell
+        // Creating and casting cell as custom cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EmojiTableViewCell
         
         // Configuring the custom cell
@@ -43,6 +51,7 @@ class EmojiTableViewController: UITableViewController {
         emojis.insert(removedEmoji, at: destinationIndexPath.row)
     }
     
+    // Enable delete option for cells after tapping on edit button
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             emojis.remove(at: indexPath.row)
@@ -53,16 +62,23 @@ class EmojiTableViewController: UITableViewController {
     // Adding leading swipe
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let remove = remove(at: indexPath)
-        let favorite = addToFavorites(at: indexPath)
-        return UISwipeActionsConfiguration(actions: [remove, favorite])
+        let addTofavorites = addToFavorites(at: indexPath)
+        return UISwipeActionsConfiguration(actions: [remove, addTofavorites])
     }
     
     // MARK: IB Actions
     @IBAction func unwindSegue(segue: UIStoryboardSegue) {
         guard segue.identifier == "saveSegue" else { return }
         let sourceVC = segue.source as! AddTableViewController
-        emojis.append(Emoji(emoji: sourceVC.emojiTF.text!, name: sourceVC.nameTF.text!, description: sourceVC.descriptionTF.text!, favorite: false))
-        tableView.reloadData()
+        
+        if let indexPath = tableView.indexPathForSelectedRow  {
+            emojis[indexPath.row] = Emoji(emoji: sourceVC.emojiTF.text!, name: sourceVC.nameTF.text!, description: sourceVC.descriptionTF.text!, favorite: emojis[indexPath.row].favorite)
+            tableView.reloadRows(at: [indexPath], with: .none)
+        } else {
+            let indexPath = IndexPath(row: emojis.count, section: 0)
+            emojis.append(Emoji(emoji: sourceVC.emojiTF.text!, name: sourceVC.nameTF.text!, description: sourceVC.descriptionTF.text!, favorite: false))
+            tableView.insertRows(at: [indexPath], with: .top)
+        }
     }
     
 }

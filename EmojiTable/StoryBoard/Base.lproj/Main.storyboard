@@ -69,6 +69,7 @@
                                     <outlet property="descriptionLabel" destination="cFH-0e-5xl" id="goK-Y1-lYM"/>
                                     <outlet property="emojiLabel" destination="hV7-HX-Dxx" id="uwK-FA-jTm"/>
                                     <outlet property="nameLabel" destination="cdk-Cv-Z8u" id="7Oc-Do-dNy"/>
+                                    <segue destination="yjq-qt-JxP" kind="show" identifier="fromCellToAdd" id="wD6-SO-q38"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -80,7 +81,7 @@
                     <navigationItem key="navigationItem" title="Emoji Table" id="XNq-dG-Cha">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="EI8-D4-lXN">
                             <connections>
-                                <segue destination="yjq-qt-JxP" kind="show" identifier="fromEmojiToAdd" id="QvN-Ld-XIY"/>
+                                <segue destination="yjq-qt-JxP" kind="show" identifier="" id="QvN-Ld-XIY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -245,6 +246,9 @@
             <point key="canvasLocation" x="-1208" y="-6"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="wD6-SO-q38"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
