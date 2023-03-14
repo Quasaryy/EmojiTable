@@ -70,19 +70,22 @@ class EmojiTableViewController: UITableViewController {
     // MARK: IB Actions
     @IBAction func unwindSegue(segue: UIStoryboardSegue) {
         guard let sourceVC = segue.source as? AddTableViewController else { return }
+        let sourceEmoji = sourceVC.emojiTF.text ?? ""
+        let sourceName = sourceVC.nameTF.text ?? ""
+        let sourceDescription = sourceVC.descriptionTF.text ?? ""
         
         // Adding or editing emoji if tapped Save button
         if segue.identifier == "saveSegue" {
             
             // Editing emoji if segue was performed from any selected row
             if let indexPath = tableView.indexPathForSelectedRow  {
-                emojis[indexPath.row] = Emoji(emoji: sourceVC.emojiTF.text!, name: sourceVC.nameTF.text!, description: sourceVC.descriptionTF.text!, favorite: emojis[indexPath.row].favorite)
+                emojis[indexPath.row] = Emoji(emoji: sourceEmoji, name: sourceName, description: sourceDescription, favorite: emojis[indexPath.row].favorite)
                 tableView.reloadRows(at: [indexPath], with: .none)
                 
                 // Adding a new emoji if segue was performed not from row
             } else {
                 let indexPath = IndexPath(row: emojis.count, section: 0)
-                emojis.append(Emoji(emoji: sourceVC.emojiTF.text!, name: sourceVC.nameTF.text!, description: sourceVC.descriptionTF.text!, favorite: false))
+                emojis.append(Emoji(emoji: sourceEmoji, name: sourceName, description: sourceDescription, favorite: false))
                 tableView.insertRows(at: [indexPath], with: .top)
             }
             
