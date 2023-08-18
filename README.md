@@ -11,4 +11,4 @@ Tech Stack: TableView with additional swipe options, Saving user settings, Optio
 ![Иллюстрация к проекту](https://github.com/Quasaryy/EmojiTable/blob/main/4.png)
 
 ## Adding new or editin existing emoji
-![Иллюстрация к проекту](https://github.com/Quasaryy/EmojiTable/blob/main/6.png)
+![Иллюстрация к проекту](https://github.com/Quasaryy/EmojiTable/blob/main/5.png)
